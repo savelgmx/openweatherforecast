@@ -43,6 +43,14 @@ android {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
         }
     }
+
+    buildTypes.each {
+        it.buildConfigField 'String', 'GOOGLE_URL' , googleUrl
+        it.buildConfigField 'String', 'SERVER_URL', serverUrl
+        it.buildConfigField 'String', 'WEATHER_API_KEY', WEATHER_API_KEY
+        it.buildConfigField 'String', 'GOOGLE_PLACE_API_KEY', GOOGLE_PLACE_API_KEY
+    }
+
 }
 
 dependencies {
@@ -59,4 +67,21 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
+
+    // Retrofit
+    def retrofit_version = "2.9.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation 'com.google.code.gson:gson:2.8.7' // JSON
+
+    //ok http
+    def okHttp_version = "4.9.1"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okHttp_version"
+    implementation "com.squareup.okhttp3:okhttp:$okHttp_version"
+    // Coroutines
+    def coroutines_version = "1.5.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+
 }
