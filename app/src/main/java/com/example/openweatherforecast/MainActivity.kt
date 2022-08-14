@@ -13,6 +13,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.openweatherforecast.ui.theme.OpenweatherforecastTheme
 import dagger.hilt.android.AndroidEntryPoint
 
+//https://github.com/android/architecture-samples/tree/dev-hilt
+//https://www.google.com/search?q=dagger+hilt+in+jet+compose+android+app+example&oq=dagger+hilt+in+jet+compose+android+app+example&aqs=chrome..69i57.16648j0j7&sourceid=chrome&{google:instantExtendedEnabledParameter}{google:omniboxStartMarginParameter}ie=UTF-8
+
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
