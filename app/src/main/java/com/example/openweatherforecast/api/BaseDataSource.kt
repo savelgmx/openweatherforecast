@@ -3,7 +3,7 @@ package com.alialfayed.weathertask.domain.api
 
 
 import com.example.openweatherforecast.core.utils.NoInternetException
-import com.example.openweatherforecast.core.utils.ResultData
+import com.example.openweatherforecast.core.utils.Resource
 import com.google.android.gms.common.api.ApiException
 import retrofit2.Response
 
@@ -13,22 +13,22 @@ import retrofit2.Response
  */
 abstract class BaseDataSource {
 
-    protected suspend fun <T> getResult(call: suspend () -> Response<T>): ResultData<T> {
+    protected suspend fun <T> getResult(call: suspend () -> Response<T>): Resource<T> {
         try {
             val response = call()
             if (response.isSuccessful) {
                 val body = response.body()
-                if (body != null) return ResultData.Success(body)
+                if (body != null) return Resource.Success(body)
             }
-            return ResultData.Failure(
+            return Resource.Error(
                 msg = response.code().toString() + " " + response.message().toString()
             )
         } catch (e: ApiException) {
-            return ResultData.Failure(msg = e.message.toString())
+            return Resource.Error(msg = e.message.toString())
         } catch (e: NoInternetException) {
-            return ResultData.Internet()
+            return Resource.Internet()
         } catch (e: Exception) {
-            return ResultData.Failure(msg = e.message.toString())
+            return Resource.Error(msg = e.message.toString())
         }
     }
 }

@@ -1,3 +1,6 @@
+import com.example.openweatherforecast.api.OpenWeatherMapRepository
+import com.example.openweatherforecast.api.OpenWeatherMapRepositoryImpl
+import com.example.openweatherforecast.db.OpenWeatherMapDatabase
 import com.example.openweatherforecast.di.NetworkObject
 import dagger.Module
 import dagger.Provides

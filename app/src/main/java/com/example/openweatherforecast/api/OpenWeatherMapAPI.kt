@@ -1,11 +1,8 @@
 
 
-import com.alialfayed.weathertask.core.utils.AppConstants
 import com.example.openweatherforecast.di.NetworkObject
 
-import com.example.openweatherforecast.response.ForecastCityResponse
 import com.example.openweatherforecast.response.WeatherResponse
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -13,19 +10,19 @@ import retrofit2.http.Query
 interface OpenWeatherMapAPI {
 
   @GET("weather")
-  fun getWeatherCity(
+  suspend fun getWeatherForecast(
     @Query("q") cityName: String,
     @Query("units") units: String = "metric",
     @Query("APPID") appId: String = NetworkObject.API_KEY,
-  ): Call<WeatherResponse>
+  ): Response<WeatherResponse>
 
   @GET("weather")
-  fun getWeatherLatLng(
+  suspend fun getWeatherLatLng(
     @Query("lat") lat: Double,
     @Query("lon") lon: Double,
     @Query("units") units: String = "metric",
     @Query("APPID") appId: String = NetworkObject.API_KEY,
-  ): Call<WeatherResponse>
+  ): Response<WeatherResponse>
 }
 
 /*

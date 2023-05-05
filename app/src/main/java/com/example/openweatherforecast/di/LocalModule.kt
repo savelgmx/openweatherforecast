@@ -1,6 +1,8 @@
 package com.example.openweatherforecast.di
 
 import android.content.Context
+import com.example.openweatherforecast.db.OpenWeatherMapDao
+import com.example.openweatherforecast.db.OpenWeatherMapDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
