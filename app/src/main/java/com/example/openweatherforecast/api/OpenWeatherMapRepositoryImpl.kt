@@ -1,6 +1,6 @@
 package com.example.openweatherforecast.api
 
-import OpenWeatherMapAPI
+
 import androidx.lifecycle.LiveData
 import com.example.openweatherforecast.core.utils.Resource
 import com.example.openweatherforecast.db.OpenWeatherMapDao
@@ -18,11 +18,11 @@ class OpenWeatherMapRepositoryImpl @Inject constructor(private val api: OpenWeat
                 dao.insert(data)
                 Resource.Success(data)
             } else {
-                Resource.Error(data,"No data found")
+                Resource.Error(null,"No data found")
             }
         } else {
-            val message = response.message()
-            Resource.Error(message)
+            val data = response.body()
+            Resource.Error(data,"Something went wrong")
         }
     }
 
