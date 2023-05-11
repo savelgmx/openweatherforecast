@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.openweatherforecast.response.WeatherResponse
 
 
-@Database(entities = [WeatherResponse::class], version = 1, exportSchema = false)
+@Database(entities = [WeatherResponseEntity::class], version = 1, exportSchema = false)
 abstract class OpenWeatherMapDatabase : RoomDatabase() {
     abstract fun openWeatherMapDao(): OpenWeatherMapDao
 

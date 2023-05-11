@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "weather_response")
+@Entity(tableName = "WeatherResponseEntity")
 data class WeatherResponseEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @SerializedName("coord")
