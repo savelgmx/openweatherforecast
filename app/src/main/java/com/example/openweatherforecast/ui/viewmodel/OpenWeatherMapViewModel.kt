@@ -8,12 +8,14 @@ import com.example.openweatherforecast.response.WeatherResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.internal.NopCollector.emit
 
+
 import javax.inject.Inject
 
 @HiltViewModel
-class OpenWeatherMapViewModel @Inject constructor(private val repository: OpenWeatherMapRepository) : ViewModel() {
+class OpenWeatherMapViewModel @Inject constructor(
+    private val repository: OpenWeatherMapRepository) : ViewModel() {
 
-    fun getWeatherForecast(city: String): LiveData<Resource<WeatherResponse>> {
+   suspend fun getWeatherForecast(city: String): LiveData<Resource<WeatherResponse>> {
         return liveData {
             emit(Resource.Loading())
             when(val status = repository.getWeatherForecast(city)) {

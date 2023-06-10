@@ -13,7 +13,7 @@ import javax.inject.Singleton
 @Singleton
 @Dao
 interface OpenWeatherMapDao {
-    @Query("SELECT * FROM WeatherResponseEntity")
+    @Query("SELECT * FROM weather_response")
     fun getWeatherForecast(): LiveData<List<WeatherResponseEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

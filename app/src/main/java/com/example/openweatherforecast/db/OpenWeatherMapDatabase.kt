@@ -13,18 +13,20 @@ abstract class OpenWeatherMapDatabase : RoomDatabase() {
 
     companion object {
         @Volatile
-        private var INSTANCE: OpenWeatherMapDatabase? = null
-
-        fun getDatabase(context: Context): OpenWeatherMapDatabase {
-            return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    OpenWeatherMapDatabase::class.java,
-                    "open_weather_map_database"
-                ).build()
-                INSTANCE = instance
-                instance
+        private var instance: OpenWeatherMapDatabase? = null
+        fun getInstance(context: Context): OpenWeatherMapDatabase {
+            return instance ?: synchronized(this) {
+                instance ?: buildDatabase(context).also { instance = it }
             }
+        }
+
+        private fun buildDatabase(context: Context): OpenWeatherMapDatabase {
+            return Room.databaseBuilder(
+                context.applicationContext,
+                OpenWeatherMapDatabase::class.java,
+                "open_weather_map_database"
+            ).build()
         }
     }
 }
+

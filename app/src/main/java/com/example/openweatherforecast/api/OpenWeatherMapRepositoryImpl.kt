@@ -15,7 +15,7 @@ class OpenWeatherMapRepositoryImpl @Inject constructor(private val api: OpenWeat
         return if (response.isSuccessful) {
             val data = response.body()
             if (data != null) {
-                dao.insert(data)
+            //    dao.insert(data)
                 Resource.Success(data)
             } else {
                 Resource.Error(null,"No data found")
