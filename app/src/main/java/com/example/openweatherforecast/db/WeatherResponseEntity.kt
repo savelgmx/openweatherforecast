@@ -8,31 +8,31 @@ import com.google.gson.annotations.SerializedName
 @TypeConverters(Converters::class)
 data class WeatherResponseEntity(
     @PrimaryKey
-    val id: Int,
-    val coordLon: Double,
-    val coordLat: Double,
-    val base: String,
-    val mainTemp: Double,
-    val mainFeelsLike: Double,
-    val mainTempMin: Double,
-    val mainTempMax: Double,
-    val mainPressure: Int,
-    val mainHumidity: Int,
-    val visibility: Int,
-    val windSpeed: Double,
-    val windDeg: Int,
-    val cloudsAll: Int,
-    val dt: Long,
-    val sysType: Int,
-    val sysId: Int,
-    val sysMessage: Double,
-    val sysCountry: String,
-    val sysSunrise: Long,
-    val sysSunset: Long,
-    val timezone: Int,
-    val name: String,
-    val cod: Int
+    var id: Int,
+    var coordLon: Double,
+    var coordLat: Double,
+    var base: String,
+    var mainTemp: Double,
+    var mainFeelsLike: Double,
+    var mainTempMin: Double,
+    var mainTempMax: Double,
+    var mainPressure: Int,
+    var mainHumidity: Int,
+    var visibility: Int,
+    var windSpeed: Double,
+    var windDeg: Int,
+    var cloudsAll: Int,
+    var dt: Long,
+    var sysType: Int,
+    var sysId: Int,
+    var sysMessage: Double,
+    var sysCountry: String,
+    var sysSunrise: Long,
+    var sysSunset: Long,
+    var timezone: Int,
+    var name: String,
+    var cod: Int
 ) {
     @Relation(parentColumn = "id", entityColumn = "weatherResponseId")
-    val weather: List<WeatherEntity> = listOf()
+    var weather: List<WeatherEntity> = listOf()
 }
