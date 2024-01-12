@@ -7,12 +7,11 @@ import java.lang.reflect.Type
 
 class Converters {
     @TypeConverter
-    //List<WeatherDetailsEntity>
-    fun setIntModel(ints: List<WeatherEntity>): String = Gson().toJson(ints)
+    fun setIntModel(ints: List<CurrentWeatherEntity>): String = Gson().toJson(ints)
 
     @TypeConverter
-    fun getIntModel(jsonModel: String): List<WeatherEntity> {
-        val listType: Type = object : TypeToken<List<WeatherEntity>>() {}.type
+    fun getIntModel(jsonModel: String): List<CurrentWeatherEntity> {
+        val listType: Type = object : TypeToken<List<CurrentWeatherEntity>>() {}.type
         return Gson().fromJson(jsonModel, listType)
     }
 

@@ -3,6 +3,7 @@ package com.example.openweatherforecast.api
 
 import androidx.lifecycle.LiveData
 import com.example.openweatherforecast.core.utils.Resource
+import com.example.openweatherforecast.db.CurrentWeatherEntity
 import com.example.openweatherforecast.db.OpenWeatherMapDao
 import com.example.openweatherforecast.db.WeatherResponseEntity
 import com.example.openweatherforecast.di.NetworkObject
@@ -18,12 +19,12 @@ class OpenWeatherMapRepositoryImpl @Inject constructor(
 ) : OpenWeatherMapRepository {
 
     override suspend fun getWeatherForecast(city: String): Resource<WeatherResponseEntity> {
-        val response = api.getWeatherForecast(city, NetworkObject.API_KEY)
+        val response = api.getCurrentWeather(city, NetworkObject.API_KEY)
         return if (response.isSuccessful) {
             val data = response.body()
             if (data != null) {
                 val weatherResponseEntity = mapToWeatherResponseEntity(data)
-                dao.insertWeatherResponse(weatherResponseEntity)
+                dao.insertOrUpdate(weatherResponseEntity)
                 Resource.Success(weatherResponseEntity)
             } else {
                 Resource.Error(null, "No data found")
@@ -35,11 +36,11 @@ class OpenWeatherMapRepositoryImpl @Inject constructor(
     }
 
     override fun getWeatherForecastFromDB(): LiveData<List<WeatherResponseEntity>> {
-        return dao.getWeatherForecast()
+        return dao.getWeather()
     }
 
-    private fun mapToWeatherResponseEntity(weatherResponse: WeatherResponse): WeatherResponseEntity {
+    private fun mapToWeatherResponseEntity(weatherResponse: WeatherResponse): CurrentWeatherEntity {
         val weatherResponseJson = Gson().toJson(weatherResponse)
-        return WeatherResponseEntity(weatherResponseJson)
+        return CurrentWeatherEntity(weatherResponseJson)
     }
 }

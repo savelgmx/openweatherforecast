@@ -2,8 +2,6 @@ package com.example.openweatherforecast.db
 
 import androidx.room.*
 
-import com.google.gson.annotations.SerializedName
-
 @Entity(tableName = "weather_response")
 @TypeConverters(Converters::class)
 data class WeatherResponseEntity(
@@ -34,5 +32,5 @@ data class WeatherResponseEntity(
     var cod: Int
 ) {
     @Relation(parentColumn = "id", entityColumn = "weatherResponseId")
-    var weather: List<WeatherEntity> = listOf()
+    var weather: List<CurrentWeatherEntity> = listOf()
 }
