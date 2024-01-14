@@ -5,28 +5,30 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "weather")
-data class CurrentWeatherEntity(
+data class CurrentWeatherEntity @JvmOverloads constructor(
     @Embedded
-    val coord: CoordEntity,
+    val coord: CoordEntity = CoordEntity(0.0, 0.0),
     @Embedded(prefix = "weather_")
-    val weather: List<WeatherEntityItem>,
-    val base: String,
+    val weather: List<WeatherEntityItem> = emptyList(),
+    val base: String = "",
     @Embedded
-    val main: MainEntity,
-    val visibility: Int,
+    val main: MainEntity = MainEntity(0.0, 0.0, 0.0, 0.0, 0, 0),
+    val visibility: Int = 0,
     @Embedded
-    val wind: WindEntity,
+    val wind: WindEntity = WindEntity(0.0, 0),
     @Embedded
-    val clouds: CloudsEntity,
-    val dt: Long,
+    val clouds: CloudsEntity = CloudsEntity(0),
+    val dt: Long = 0L,
     @Embedded
-    val sys: SysEntity,
-    val timezone: Int,
-    @PrimaryKey
-    val id: Int,
+    val sys: SysEntity = SysEntity(0, 0, 0.0, "", 0L, 0L),
+    val timezone: Int = 0,
+
     val name: String,
     val cod: Int
-)
+) {
+    @field:PrimaryKey(autoGenerate=true)
+    var id: Int=0
+}
 
 data class CoordEntity(
     val lon: Double,
