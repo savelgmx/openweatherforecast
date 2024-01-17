@@ -7,10 +7,10 @@ import androidx.room.TypeConverter
 import androidx.room.TypeConverters
 
 @Entity(tableName = "weather")
+@TypeConverters(Converters::class)
 data class CurrentWeatherEntity @JvmOverloads constructor(
     @Embedded
     val coord: CoordEntity = CoordEntity(0.0, 0.0),
-    @TypeConverters(WeatherListConverter::class)
     val weather: List<WeatherEntityItem> = emptyList(),
     val base: String = "",
     @Embedded
@@ -71,26 +71,3 @@ data class SysEntity(
     val sunset: Long
 )
 
-class WeatherListConverter {
-    @TypeConverter
-    fun fromString(value: String): List<WeatherEntityItem> {
-        // Implement logic to convert a string to List<WeatherEntityItem>
-        // Example: Use a JSON deserializer or any other method based on your data structure
-        // For simplicity, let's assume a simple format: weather1|main1|desc1|icon1,weather2|main2|desc2|icon2
-        val items = value.split(",")
-        return items.map {
-            val parts = it.split("|")
-            WeatherEntityItem(parts[0].toInt(), parts[1], parts[2], parts[3])
-        }
-    }
-
-    @TypeConverter
-    fun toString(value: List<WeatherEntityItem>): String {
-        // Implement logic to convert List<WeatherEntityItem> to a string
-        // Example: Use a JSON serializer or any other method based on your data structure
-        // For simplicity, let's assume a simple format: weather1|main1|desc1|icon1,weather2|main2|desc2|icon2
-        return value.joinToString(",") {
-            "${it.weatherId}|${it.main}|${it.description}|${it.icon}"
-        }
-    }
-}
