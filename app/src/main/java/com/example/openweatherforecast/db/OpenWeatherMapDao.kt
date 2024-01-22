@@ -9,7 +9,10 @@ interface OpenWeatherMapDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertOrUpdate(currentWeatherEntity: CurrentWeatherEntity)
     @Query("SELECT * FROM weather")
-    fun getWeather(): LiveData<CurrentWeatherEntity?>
+    fun getWeather(): LiveData<List<CurrentWeatherEntity>>
+
+    @Query("DELETE FROM weather")
+    fun deleteAllFromWeather()
 
 }
 
