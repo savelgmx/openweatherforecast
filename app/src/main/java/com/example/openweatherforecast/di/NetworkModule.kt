@@ -20,6 +20,7 @@ class NetworkModule {
     }
 
     @Provides
+    @Singleton
     fun provideOpenWeatherMapRepository(api: OpenWeatherMapAPI, database: OpenWeatherMapDatabase): OpenWeatherMapRepository {
         return OpenWeatherMapRepositoryImpl(api, database.openWeatherMapDao())
     }
